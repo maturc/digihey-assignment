@@ -7,3 +7,9 @@ type ITransformer = {
   gear: Array<string>; 
   status: string;
 }
+
+type IVehicleType = {
+  group: string;
+  type: string;
+  model: string;
+}

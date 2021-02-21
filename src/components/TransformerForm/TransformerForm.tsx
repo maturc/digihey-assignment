@@ -1,3 +1,4 @@
+import { func } from "prop-types";
 import { useState } from "react";
 import { VehicleTree, Node } from "../../utils/VehicleTree";
 
@@ -6,9 +7,12 @@ type ITransformerForm = {
 }
 
 export function TransformerForm( {vehicleTypes}: ITransformerForm ) {
+  const [name, setName] = useState<string>("");
   const [activeGroup, setActiveGroup] = useState<string | undefined>("Air");
   const [activeType,  setActiveType]  = useState<string | undefined>("Plane");
   const [activeModel, setActiveModel] = useState<string | undefined>(undefined);
+  const [gear, setGear] = useState<string>("");
+  const [status, setStatus] = useState<string>("OK");
 
   let groupDropdown: any = <option value="loading">Loading</option>;
   let typeDropdown:  any;
@@ -32,10 +36,29 @@ export function TransformerForm( {vehicleTypes}: ITransformerForm ) {
         })
       }
     }
-
+  }
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    fetch("http://localhost:3004/transformers", {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify({
+        name: name,
+        vehicleGroup: activeGroup,
+        vehicleType: activeType,
+        vehicleModel: activeModel,
+        gear: gear.split(" "),
+        status: status
+      })
+    })
+    .then(function(res){ console.log(res) })
+    .catch(function(res){ console.log(res) })
   }
   return (
-    <form>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <label htmlFor="name">Name (4 to 8 characters):</label>
       <input
         type="text"
@@ -45,6 +68,8 @@ export function TransformerForm( {vehicleTypes}: ITransformerForm ) {
         maxLength={8}
         size={10}
         required
+        onChange={(e) => setName(e.target.value)}
+        value={name}
       />
       <label htmlFor="vehicle-group">Vehicle Group:</label>
       <select name="vehicle-group" id="vehicle-group" required onChange={(e) => { setActiveGroup(e.target.value); setActiveType(undefined); setActiveModel(undefined) }} value={activeGroup}>
@@ -66,10 +91,11 @@ export function TransformerForm( {vehicleTypes}: ITransformerForm ) {
         minLength={4}
         maxLength={8}
         size={10}
-        required
+        onChange={(e) => setGear(e.target.value)}
+        value={gear}
       />
       <label htmlFor="status">Status:</label>
-      <select name="status" id="status" required>
+      <select name="status" id="status" required onChange={(e) => setStatus(e.target.value)} value={status}>
         <option value="ok">OK</option>
         <option value="injured">INJURED</option>
         <option value="mia">MIA</option>

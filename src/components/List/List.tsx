@@ -7,7 +7,7 @@ type IListProps = {
 export function List( {transformers}: IListProps ) {
   const listOfTransformers = transformers.map((transformer)=> {
     const tableRow = (
-      <tr>
+      <tr key={transformer.id}>
         <td>{transformer.name         }</td>
         <td>{transformer.vehicleGroup }</td>
         <td>{transformer.vehicleType  }</td>
@@ -20,15 +20,19 @@ export function List( {transformers}: IListProps ) {
   });
   return (
     <table>
-      <tr>
-        <th>Name</th>
-        <th>Vehicle Group</th>
-        <th>Vehicle Type</th>
-        <th>Vehicle model</th>
-        <th>Gear</th>
-        <th>Status</th>
-      </tr>
-      {listOfTransformers}
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Vehicle Group</th>
+          <th>Vehicle Type</th>
+          <th>Vehicle model</th>
+          <th>Gear</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {listOfTransformers}
+      </tbody>
     </table>
   );
 }

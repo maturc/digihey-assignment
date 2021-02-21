@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { List } from '../../components/List';
+import { Header } from '../../components/Header';
+import { CustomButton } from '../../components/CustomButton';
 
 export function Home() {
-  //'http://localhost:3004/transformers'
   const [transformers, setTransformers] = useState<Array<ITransformer>>([]);
 
   useEffect(() => {
@@ -17,10 +18,17 @@ export function Home() {
     };
     fetchTransformers();
   }, []);
-
+  function test(){
+    console.log("button works")
+  }
   return (
     <>
+      <Header />
       <List transformers={transformers} />
+      <CustomButton
+        buttonText="Add transformer"
+        onClickCallback={test}
+      />
     </>
   );
 }

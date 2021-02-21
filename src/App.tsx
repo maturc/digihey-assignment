@@ -7,7 +7,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/addnew">
+        <Route path="/add">
           <AddNew />
         </Route>
         <Route path="/">

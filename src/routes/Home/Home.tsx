@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { List } from '../../components/List';
 import { Header } from '../../components/Header';
 import { CustomButton } from '../../components/CustomButton';
+import { useHistory } from 'react-router-dom';
 
 export function Home() {
   const [transformers, setTransformers] = useState<Array<ITransformer>>([]);
@@ -18,8 +19,10 @@ export function Home() {
     };
     fetchTransformers();
   }, []);
-  function test(){
-    console.log("button works")
+
+  let history = useHistory();
+  function addNewClick() {
+    history.push("/add");
   }
   return (
     <>
@@ -27,7 +30,7 @@ export function Home() {
       <List transformers={transformers} />
       <CustomButton
         buttonText="Add transformer"
-        onClickCallback={test}
+        onClickCallback={addNewClick}
       />
     </>
   );

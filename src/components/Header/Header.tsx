@@ -7,9 +7,6 @@ export function Header() {
       <h1>
         <Link to="/">Transformer Management</Link>
       </h1>
-      <div>
-        Search ---- only in home??
-      </div>
     </header>
   );
 }

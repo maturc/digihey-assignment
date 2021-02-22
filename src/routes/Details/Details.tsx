@@ -6,8 +6,8 @@ export function Details(props: any) {
   const id = props.match.params.id;
   
   const [transformer, setTransformer] = useState<ITransformer>();
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isError, setIsError] = useState<boolean>(false);
+  const [isLoading,   setIsLoading]   = useState<boolean>(true);
+  const [isError,     setIsError]     = useState<boolean>(false);
 
   useEffect(() => {
     const fetchTransformers = async () => {

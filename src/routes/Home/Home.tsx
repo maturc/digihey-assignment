@@ -21,7 +21,7 @@ export function Home() {
         setFilteredTransformers(json);
         setIsLoading(false);
       } catch (err) {
-        console.log(err); //EXPAND
+        console.log(err);
       }
     };
     fetchTransformers();

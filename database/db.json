@@ -77,7 +77,7 @@
   ],
   "transformers": [
     {
-      "id": 0,
+      "id": 3,
       "name": "Optimus Prime",
       "vehicleGroup": "Land",
       "vehicleType": "Truck",

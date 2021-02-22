@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { VehicleTree, Node } from "../../utils/VehicleTree";
 import './transformerForm.css';
 
 type ITransformerForm = {
   initialTransformer?: ITransformer;
 }
-
 export function TransformerForm( {initialTransformer}: ITransformerForm ) {
+  let history = useHistory();
+
   const [name, setName] = useState<string>(initialTransformer?.name ?? "");
   const [activeGroup, setActiveGroup] = useState<string | undefined>(initialTransformer?.vehicleGroup ?? "Air");
   const [activeType,  setActiveType]  = useState<string | undefined>(initialTransformer?.vehicleType ?? "Plane");
@@ -70,6 +72,19 @@ export function TransformerForm( {initialTransformer}: ITransformerForm ) {
     })
     .then(function(res){ console.log(res) })
     .catch(function(res){ console.log(res) })
+    setTimeout(() => { history.push("/"); }, 200);
+  }
+  function handleDelete(id: number) {
+    fetch(`http://localhost:3004/transformers/${id}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "DELETE",
+    })
+    .then(function(res){ console.log(res) })
+    .catch(function(res){ console.log(res) })
+    setTimeout(() => { history.push("/"); }, 200);
   }
   return (
     <form className="form" onSubmit={(e) => initialTransformer? handleSubmit(e, "PATCH", initialTransformer.id) : handleSubmit(e)}>
@@ -127,6 +142,7 @@ export function TransformerForm( {initialTransformer}: ITransformerForm ) {
         </select>
       </div>
       <input className="form__button button" type="submit" value="Submit"/>
+      { initialTransformer && <button className="form__button button" onClick={ () => handleDelete(initialTransformer.id) }>Delete</button> }
     </form>
   );
 }

@@ -4,6 +4,7 @@ import { Header } from '../../components/Header';
 import { CustomButton } from '../../components/CustomButton';
 import { useHistory } from 'react-router-dom';
 import { Search } from '../../components/Search';
+import './home.css';
 
 export function Home() {
   const [transformers,         setTransformers]         = useState<Array<ITransformer>>([]);
@@ -35,10 +36,12 @@ export function Home() {
       <Header />
       <Search transformers={transformers} setFilteredTransformers={setFilteredTransformers} />
       { isLoading ? <h1>Loading</h1> : <List transformers={filteredTransformers} update={update} setUpdate={setUpdate} /> }
-      <CustomButton
-        buttonText="Add transformer"
-        onClickCallback={addNewClick}
-      />
+      <div className="home__button">
+        <CustomButton
+          buttonText="+ Add transformer"
+          onClickCallback={addNewClick}
+        />
+      </div>
     </>
   );
 }

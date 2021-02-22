@@ -1,3 +1,5 @@
+import './customButton.css';
+
 type ICustomButtonProps = {
   buttonText: string;
   onClickCallback: Function;
@@ -5,7 +7,7 @@ type ICustomButtonProps = {
 
 export function CustomButton( {buttonText, onClickCallback}: ICustomButtonProps ) {
   return (
-    <button onClick={() => onClickCallback()}>
+    <button className="button" onClick={() => onClickCallback()}>
       {buttonText}
     </button>
   );

@@ -1,0 +1,30 @@
+.header {
+  padding: 16px;
+}
+
+.header:hover {
+  -webkit-filter: contrast(20%);
+          filter: contrast(20%);
+}
+
+.header__link {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  text-decoration: none;
+  color: #b30000;
+}
+
+.header__text {
+  background-color: unset;
+}
+
+.header__logo {
+  width: 40px;
+  margin-right: 4px;
+}
+/*# sourceMappingURL=header.css.map */

@@ -1,0 +1,53 @@
+.table {
+  border-collapse: collapse;
+  margin: 32px;
+  border: 1px black dashed;
+  padding: 8px;
+  color: #3d3d3d;
+}
+
+.table__body > tr:nth-child(odd) {
+  background-color: white;
+}
+
+.table__body-row:hover {
+  color: #bf0000;
+}
+
+.table__body-row > td {
+  padding: 8px;
+}
+
+.table__head {
+  color: black;
+}
+
+.table__head > tr > th {
+  padding: 8px;
+}
+
+.table__gear {
+  background-color: grey;
+  color: white;
+  padding: 4px 6px;
+  border-radius: 8px;
+  margin: auto 2px;
+}
+
+.table__button {
+  background-color: #b30000;
+  border: none;
+  padding: 6px;
+  font-family: 'PT Mono', monospace;
+  font-weight: bold;
+  color: white;
+  border-radius: 8px;
+}
+
+.table__button:hover {
+  background-color: #a30000;
+  -webkit-box-shadow: 1px 1px 1px grey;
+          box-shadow: 1px 1px 1px grey;
+  cursor: pointer;
+}
+/*# sourceMappingURL=list.css.map */

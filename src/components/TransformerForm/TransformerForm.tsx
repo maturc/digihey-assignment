@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { VehicleTree, Node } from "../../utils/VehicleTree";
+import './transformerForm.css';
 
 type ITransformerForm = {
   initialTransformer?: ITransformer;
@@ -71,49 +72,61 @@ export function TransformerForm( {initialTransformer}: ITransformerForm ) {
     .catch(function(res){ console.log(res) })
   }
   return (
-    <form onSubmit={(e) => initialTransformer? handleSubmit(e, "PATCH", initialTransformer.id) : handleSubmit(e)}>
-      <label htmlFor="name">Name (4 to 8 characters):</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        minLength={4}
-        maxLength={8}
-        size={10}
-        required
-        onChange={(e) => setName(e.target.value)}
-        value={name}
-      />
-      <label htmlFor="vehicle-group">Vehicle Group:</label>
-      <select name="vehicle-group" id="vehicle-group" required onChange={(e) => { setActiveGroup(e.target.value); setActiveType(undefined); setActiveModel(undefined) }} value={activeGroup}>
-        { groupDropdown }
-      </select>
-      <label htmlFor="vehicle-type">Vehicle Type:</label>
-      <select name="vehicle-type" id="vehicle-type" required onChange={(e) => { setActiveType(e.target.value); setActiveModel(undefined) }} value={activeType}>
-        { typeDropdown }
-      </select>
-      <label htmlFor="vehicle-model">Vehicle Model:</label>
-      <select name="vehicle-model" id="vehicle-model" required onChange={(e) => setActiveModel(e.target.value)} value={activeModel}>
-        { modelDropdown }
-      </select>
-      <label htmlFor="name">Gear:</label>
-      <input
-        type="text"
-        id="gear"
-        name="gear"
-        minLength={4}
-        maxLength={8}
-        size={10}
-        onChange={(e) => setGear(e.target.value)}
-        value={gear}
-      />
-      <label htmlFor="status">Status:</label>
-      <select name="status" id="status" required onChange={(e) => setStatus(e.target.value)} value={status}>
-        <option value="OK">OK</option>
-        <option value="INJURED">INJURED</option>
-        <option value="MIA">MIA</option>
-      </select>
-      <input type="submit"/>
+    <form className="form" onSubmit={(e) => initialTransformer? handleSubmit(e, "PATCH", initialTransformer.id) : handleSubmit(e)}>
+      <div>
+        <label htmlFor="name">Name (2 to 16 characters)</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          minLength={2}
+          maxLength={16}
+          size={16}
+          required
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+        />
+      </div>
+      <div>
+        <label htmlFor="vehicle-group">Vehicle Group</label>
+        <select name="vehicle-group" id="vehicle-group" required onChange={(e) => { setActiveGroup(e.target.value); setActiveType(undefined); setActiveModel(undefined) }} value={activeGroup}>
+          { groupDropdown }
+        </select>
+      </div>
+      <div>
+        <label htmlFor="vehicle-type">Vehicle Type</label>
+        <select name="vehicle-type" id="vehicle-type" required onChange={(e) => { setActiveType(e.target.value); setActiveModel(undefined) }} value={activeType}>
+          { typeDropdown }
+        </select>
+      </div>
+      <div>
+        <label htmlFor="vehicle-model">Vehicle Model</label>
+        <select name="vehicle-model" id="vehicle-model" required onChange={(e) => setActiveModel(e.target.value)} value={activeModel}>
+          { modelDropdown }
+        </select>
+      </div>
+      <div>
+        <label htmlFor="name">Gear (seperate each with a space)</label>
+        <input
+          type="text"
+          id="gear"
+          name="gear"
+          minLength={0}
+          maxLength={32}
+          size={32}
+          onChange={(e) => setGear(e.target.value)}
+          value={gear}
+        />
+      </div>
+      <div>
+        <label htmlFor="status">Status</label>
+        <select name="status" id="status" required onChange={(e) => setStatus(e.target.value)} value={status}>
+          <option value="OK">OK</option>
+          <option value="INJURED">INJURED</option>
+          <option value="MIA">MIA</option>
+        </select>
+      </div>
+      <input className="form__button button" type="submit" value="Submit"/>
     </form>
   );
 }

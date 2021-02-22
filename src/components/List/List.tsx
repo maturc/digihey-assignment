@@ -1,4 +1,5 @@
 import { useHistory } from "react-router-dom";
+import './list.css';
 
 type IListProps = {
   transformers: Array<ITransformer>;
@@ -27,13 +28,18 @@ export function List( {transformers, update, setUpdate}: IListProps ) {
     setTimeout(() => { setUpdate(update+1); }, 200);
   }
   const listOfTransformers = transformers.map((transformer)=> {
+    const gear = transformer.gear.map((item) => {
+      return <span className="table__gear">{item}</span>
+    });
+    console.log(gear);
+    
     const tableRow = (
-      <tr key={transformer.id}>
+      <tr key={transformer.id} className="table__body-row">
         <td>{transformer.name         }</td>
         <td>{transformer.vehicleGroup }</td>
         <td>{transformer.vehicleType  }</td>
         <td>{transformer.vehicleModel }</td>
-        <td>{transformer.gear         }</td>
+        <td>{gear                     }</td>
         <td>{transformer.status       }</td>
         <td>
           <select name="status" id="status" required onChange={(e) => handleOnChange(e, transformer)} value={transformer.status}>
@@ -43,7 +49,7 @@ export function List( {transformers, update, setUpdate}: IListProps ) {
           </select>
         </td>
         <td>
-          <button onClick={() => handleClick(transformer.id)}>
+          <button className="table__button" onClick={() => handleClick(transformer.id)}>
             edit
           </button>
         </td>
@@ -52,8 +58,8 @@ export function List( {transformers, update, setUpdate}: IListProps ) {
     return tableRow;
   });
   return (
-    <table>
-      <thead>
+    <table className="table">
+      <thead className="table__head">
         <tr>
           <th>Name</th>
           <th>Vehicle Group</th>
@@ -63,7 +69,7 @@ export function List( {transformers, update, setUpdate}: IListProps ) {
           <th>Status</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody className="table__body">
         {listOfTransformers}
       </tbody>
     </table>

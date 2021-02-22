@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import './search.css';
 
 type ISearchProps = {
   transformers: Array<ITransformer>
@@ -11,12 +12,11 @@ export function Search( {transformers, setFilteredTransformers}: ISearchProps ) 
     const keyword = searchKeyword.toLowerCase();
     const filteredArray = transformers.filter((item) => item.name.toLowerCase().includes(keyword));
     setFilteredTransformers(filteredArray);
-  }, [searchKeyword]);
+  }, [searchKeyword, transformers, setFilteredTransformers]);
 
   return (
-    <div>
-      <label htmlFor="search">Search:</label>
-      <input type="text" id="search" name="search" value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)}/>
+    <div className="search">
+      <input type="text" id="search" name="search" placeholder="Search" value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)}/>
     </div>
   );
 }

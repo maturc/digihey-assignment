@@ -1,46 +1,29 @@
-# Getting Started with Create React App
+# Transformers Management app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Instructions:
+### `npm install` or `yarn install`
+### `npm start` or `yarn start` to start the app in development mode.
+### Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Available Scripts
+## About:
+This application was developed for a job assignment from Digihey. Its an application for managing transformers made in React.
 
-In the project directory, you can run:
+## Design:
+The project is made up of two main building blocks, the `routes` folder which has all the main pages, and the `components` folder which has lower level elements.
+Each `route` and `component` has its own folder that contains it's typescript and css code.
+The main components are the list that is used to display all of the transformers on the home page, and the form component that is used both for adding new transformers and editing them. The list just fetches data from the server and displays it in a table. It also has a dropdown that lets you change the transformer's status and two buttons. One button deletes the transformer and the other one brings you to a page where you can edit that transformer.
+The form component has an optional prop that depending if it's presant or not can change the form into a form used for editing or for adding new transformers. They are both pretty much the same, but the one for edditing has initial values and uses a different HTTP method in its fetch function.
+The form has 3 linked select elements that have a parent-child relationship which changes their availible options depending on the value of its parent. The data for those links is availible on the api and it features a collection of those 3 part links. I created a class that turns those into a tree graph that we can scale to get the availible child elements. I picked this option because it enables us to add new entries to the api without having to change the code.
 
-### `yarn start`
+## Things I would change if I had more time:
+If I had more time for this project, I would first focus on the code readability. Some parts of it are pretty messy right now. I would add some custom hook and move some of the logic into them, especially all of the `fetch` functions, I should have reused them from the start. I'd also fix some bugs that I noticed, which I didn't have time for.
+I'd expand the error handeling as well, there isn't much of it right now. It's not a big problem for local usage, but it could cause some problems if it was on a server.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Homepage
+![homepage](https://raw.githubusercontent.com/maturc/digihey-assignment/main/preview/home-page.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### Details page
+![details](https://raw.githubusercontent.com/maturc/digihey-assignment/main/preview/details-page.png)
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### Mobile design
+![mobile](https://raw.githubusercontent.com/maturc/digihey-assignment/main/preview/mobile.png)

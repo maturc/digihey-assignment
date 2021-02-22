@@ -14,7 +14,7 @@ export function Details(props: any) {
       try {
         const response = await fetch(`http://localhost:3004/transformers/${id}`);
         const json = await response.json();
-        if(Object.keys(json).length === 0) throw "404 Not Found";
+        if(Object.keys(json).length === 0) throw new Error("404 Not Found");
         setTransformer(json);
         setIsLoading(false);
       } catch (err) {
@@ -23,7 +23,7 @@ export function Details(props: any) {
       }
     };
     fetchTransformers();
-  }, []);
+  }, [id]);
   const success = <TransformerForm initialTransformer={transformer} />
   const error = <h1>404 Not Found</h1>;
   console.log(isError)

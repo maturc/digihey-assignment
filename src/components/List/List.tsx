@@ -1,4 +1,3 @@
-import { useReducer, useState } from "react"
 import { useHistory } from "react-router-dom";
 
 type IListProps = {

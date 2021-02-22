@@ -9,8 +9,20 @@ type IListProps = {
 
 export function List( {transformers, update, setUpdate}: IListProps ) {
   let history = useHistory();
-  function handleClick(id: number) {
+  function handleEdit(id: number) {
     history.push(`/edit/${id}`);
+  }
+  function handleDelete(id: number) {
+    fetch(`http://localhost:3004/transformers/${id}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "DELETE",
+    })
+    .then(function(res){ console.log(res) })
+    .catch(function(res){ console.log(res) })
+    setTimeout(() => { setUpdate(update+1); }, 200);
   }
   function handleOnChange( e: React.ChangeEvent<HTMLSelectElement>, transformer: ITransformer) {
     fetch(`http://localhost:3004/transformers/${transformer.id}`, {
@@ -49,8 +61,11 @@ export function List( {transformers, update, setUpdate}: IListProps ) {
           </select>
         </td>
         <td>
-          <button className="table__button" onClick={() => handleClick(transformer.id)}>
-            edit
+          <button className="table__button" onClick={() => handleEdit(transformer.id)}>
+            Edit
+          </button>
+          <button className="table__button" onClick={() => handleDelete(transformer.id)}>
+            Delete
           </button>
         </td>
       </tr>

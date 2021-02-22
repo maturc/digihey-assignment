@@ -42,6 +42,7 @@
   font-weight: bold;
   color: white;
   border-radius: 8px;
+  margin: 0 2px;
 }
 
 .table__button:hover {

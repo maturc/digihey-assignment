@@ -1,4 +1,3 @@
-import { func } from "prop-types";
 import { useState } from "react";
 import { VehicleTree, Node } from "../../utils/VehicleTree";
 
@@ -96,9 +95,9 @@ export function TransformerForm( {vehicleTypes}: ITransformerForm ) {
       />
       <label htmlFor="status">Status:</label>
       <select name="status" id="status" required onChange={(e) => setStatus(e.target.value)} value={status}>
-        <option value="ok">OK</option>
-        <option value="injured">INJURED</option>
-        <option value="mia">MIA</option>
+        <option value="OK">OK</option>
+        <option value="INJURED">INJURED</option>
+        <option value="MIA">MIA</option>
       </select>
       <input type="submit"/>
     </form>

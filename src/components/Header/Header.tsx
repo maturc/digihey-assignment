@@ -7,7 +7,7 @@ export function Header() {
         Transformer Management
       </h1>
       <div>
-        Search
+        Search ---- only in home??
       </div>
     </header>
   );

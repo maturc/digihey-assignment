@@ -3,7 +3,8 @@
     {
       "id": 0,
       "name": "Autobots"
-    }, {
+    },
+    {
       "id": 1,
       "name": "Decepticons"
     }
@@ -87,7 +88,8 @@
         "shield"
       ],
       "status": "OK"
-    }, {
+    },
+    {
       "id": 1,
       "name": "Bumblebee",
       "vehicleGroup": "Land",
@@ -97,16 +99,74 @@
         "machine gun"
       ],
       "status": "INJURED"
-    }, {
+    },
+    {
       "id": 2,
       "name": "Megatron",
       "vehicleGroup": "Air",
       "vehicleType": "Plane",
-      "vehicleModel": "Sukhoi",
-      "gear":[
+      "vehicleModel": "F-22",
+      "gear": [
         "canon"
       ],
       "status": "MIA"
+    },
+    {
+      "name": "Starscream",
+      "vehicleGroup": "Air",
+      "vehicleType": "Plane",
+      "vehicleModel": "MiG",
+      "gear": [
+        "gun"
+      ],
+      "status": "OK",
+      "id": 4
+    },
+    {
+      "name": "Jetfire",
+      "vehicleGroup": "Air",
+      "vehicleType": "Plane",
+      "vehicleModel": "MiG",
+      "gear": [
+        "sword"
+      ],
+      "status": "MIA",
+      "id": 5
+    },
+    {
+      "name": "Arcee",
+      "vehicleGroup": "Land",
+      "vehicleType": "Car",
+      "gear": [
+        "pistol",
+        "shield"
+      ],
+      "status": "INJURED",
+      "id": 6,
+      "vehicleModel": "Camaro"
+    },
+    {
+      "name": "Soundwave",
+      "vehicleGroup": "Land",
+      "vehicleType": "Truck",
+      "vehicleModel": "Unimog",
+      "gear": [
+        "dagger",
+        "dagger"
+      ],
+      "status": "INJURED",
+      "id": 7
+    },
+    {
+      "name": "Fallen",
+      "vehicleGroup": "Sea",
+      "vehicleType": "Boat",
+      "vehicleModel": "Jetboat",
+      "gear": [
+        "torpedo"
+      ],
+      "status": "OK",
+      "id": 8
     }
   ]
 }

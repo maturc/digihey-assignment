@@ -1,17 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { VehicleTree, Node } from "../../utils/VehicleTree";
 
 type ITransformerForm = {
-  vehicleTypes: VehicleTree;
+  initialTransformer?: ITransformer;
 }
 
-export function TransformerForm( {vehicleTypes}: ITransformerForm ) {
-  const [name, setName] = useState<string>("");
-  const [activeGroup, setActiveGroup] = useState<string | undefined>("Air");
-  const [activeType,  setActiveType]  = useState<string | undefined>("Plane");
-  const [activeModel, setActiveModel] = useState<string | undefined>(undefined);
-  const [gear, setGear] = useState<string>("");
-  const [status, setStatus] = useState<string>("OK");
+export function TransformerForm( {initialTransformer}: ITransformerForm ) {
+  const [name, setName] = useState<string>(initialTransformer?.name ?? "");
+  const [activeGroup, setActiveGroup] = useState<string | undefined>(initialTransformer?.vehicleGroup ?? "Air");
+  const [activeType,  setActiveType]  = useState<string | undefined>(initialTransformer?.vehicleType ?? "Plane");
+  const [activeModel, setActiveModel] = useState<string | undefined>(initialTransformer?.vehicleModel ?? undefined);
+  const [gear, setGear] = useState<string>(initialTransformer?.gear.join(" ") ?? "");
+  const [status, setStatus] = useState<string>(initialTransformer?.status ?? "OK");
+
+  const [vehicleTypes, setVehicleTypes] = useState<VehicleTree>();
+
+  useEffect(() => {
+    const fetchTypes = async () => {
+      const response = await fetch('http://localhost:3004/vehicleTypes');
+      const json = await response.json();
+      const vehicleTree = new VehicleTree();
+      vehicleTree.addFromArray(json);
+      setVehicleTypes(vehicleTree);
+    };
+    fetchTypes();
+  }, []);
 
   let groupDropdown: any = <option value="loading">Loading</option>;
   let typeDropdown:  any;
@@ -36,14 +49,15 @@ export function TransformerForm( {vehicleTypes}: ITransformerForm ) {
       }
     }
   }
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>, method = "POST", id?:number) {
     e.preventDefault();
-    fetch("http://localhost:3004/transformers", {
+    const url = id? `http://localhost:3004/transformers/${id}` : `http://localhost:3004/transformers`
+    fetch(url, {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      method: "POST",
+      method: method,
       body: JSON.stringify({
         name: name,
         vehicleGroup: activeGroup,
@@ -57,7 +71,7 @@ export function TransformerForm( {vehicleTypes}: ITransformerForm ) {
     .catch(function(res){ console.log(res) })
   }
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={(e) => initialTransformer? handleSubmit(e, "PATCH", initialTransformer.id) : handleSubmit(e)}>
       <label htmlFor="name">Name (4 to 8 characters):</label>
       <input
         type="text"

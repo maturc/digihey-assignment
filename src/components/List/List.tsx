@@ -1,10 +1,27 @@
-import React from 'react';
+import { useReducer, useState } from "react"
 
 type IListProps = {
   transformers: Array<ITransformer>;
+  update: number;
+  setUpdate: Function;
 }
 
-export function List( {transformers}: IListProps ) {
+export function List( {transformers, update, setUpdate}: IListProps ) {
+  function handleOnChange( e: React.ChangeEvent<HTMLSelectElement>, transformer: ITransformer) {
+    fetch(`http://localhost:3004/transformers/${transformer.id}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "PATCH",
+      body: JSON.stringify({
+        status: e.target.value
+      })
+    })
+    .then(function(res){ console.log(res) })
+    .catch(function(res){ console.log(res) })
+    setTimeout(() => { setUpdate(update+1); }, 200);
+  }
   const listOfTransformers = transformers.map((transformer)=> {
     const tableRow = (
       <tr key={transformer.id}>
@@ -14,6 +31,13 @@ export function List( {transformers}: IListProps ) {
         <td>{transformer.vehicleModel }</td>
         <td>{transformer.gear         }</td>
         <td>{transformer.status       }</td>
+        <td>
+          <select name="status" id="status" required onChange={(e) => handleOnChange(e, transformer)} value={transformer.status}>
+            <option value="OK">OK</option>
+            <option value="INJURED">INJURED</option>
+            <option value="MIA">MIA</option>
+          </select>
+        </td>
       </tr>
     );
     return tableRow;

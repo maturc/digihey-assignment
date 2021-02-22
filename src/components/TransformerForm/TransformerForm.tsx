@@ -127,8 +127,8 @@ export function TransformerForm( {initialTransformer}: ITransformerForm ) {
           id="gear"
           name="gear"
           minLength={0}
-          maxLength={32}
-          size={32}
+          maxLength={16}
+          size={16}
           onChange={(e) => setGear(e.target.value)}
           value={gear}
         />

@@ -51,7 +51,7 @@ export function List( {transformers, update, setUpdate}: IListProps ) {
         <td>{transformer.vehicleGroup }</td>
         <td>{transformer.vehicleType  }</td>
         <td>{transformer.vehicleModel }</td>
-        <td>{gear                     }</td>
+        <td className="table__gear-outer">{gear}</td>
         <td>{transformer.status       }</td>
         <td>
           <select name="status" id="status" required onChange={(e) => handleOnChange(e, transformer)} value={transformer.status}>

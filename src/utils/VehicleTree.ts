@@ -1,3 +1,4 @@
+//turns the vehicle type data into a tree graph
 export class VehicleTree {
   root: Node;
   constructor() {

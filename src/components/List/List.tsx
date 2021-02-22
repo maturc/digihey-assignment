@@ -1,4 +1,5 @@
 import { useReducer, useState } from "react"
+import { useHistory } from "react-router-dom";
 
 type IListProps = {
   transformers: Array<ITransformer>;
@@ -7,6 +8,10 @@ type IListProps = {
 }
 
 export function List( {transformers, update, setUpdate}: IListProps ) {
+  let history = useHistory();
+  function handleClick(id: number) {
+    history.push(`/edit/${id}`);
+  }
   function handleOnChange( e: React.ChangeEvent<HTMLSelectElement>, transformer: ITransformer) {
     fetch(`http://localhost:3004/transformers/${transformer.id}`, {
       headers: {
@@ -37,6 +42,11 @@ export function List( {transformers, update, setUpdate}: IListProps ) {
             <option value="INJURED">INJURED</option>
             <option value="MIA">MIA</option>
           </select>
+        </td>
+        <td>
+          <button onClick={() => handleClick(transformer.id)}>
+            edit
+          </button>
         </td>
       </tr>
     );

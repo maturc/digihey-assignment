@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Header } from "../../components/Header";
 import { TransformerForm } from "../../components/TransformerForm";
 
 export function Details(props: any) {
@@ -6,23 +7,30 @@ export function Details(props: any) {
   
   const [transformer, setTransformer] = useState<ITransformer>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchTransformers = async () => {
       try {
         const response = await fetch(`http://localhost:3004/transformers/${id}`);
         const json = await response.json();
+        if(Object.keys(json).length === 0) throw "404 Not Found";
         setTransformer(json);
         setIsLoading(false);
       } catch (err) {
-        console.log(err); //EXPAND
+        setIsError(true);
+        setIsLoading(false);
       }
     };
     fetchTransformers();
   }, []);
+  const success = <TransformerForm initialTransformer={transformer} />
+  const error = <h1>404 Not Found</h1>;
+  console.log(isError)
   return (
     <>
-      { isLoading ? <h1>Loading</h1> : <TransformerForm initialTransformer={transformer} /> }
+      <Header />
+      { isLoading ? <h1>Loading</h1> : isError? error : success }
     </>
   );
 }
